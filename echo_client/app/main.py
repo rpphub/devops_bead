@@ -4,8 +4,12 @@ import streamlit as st
 #SERVER_URL = "http://echo_server:8000/echo"  # docker-compose service név
 SERVER_URL = "http://localhost:8000/echo"  # docker-compose service név
 
-st.set_page_config(page_title="Echo Chat", page_icon="💬")
-st.title("Echo Chat (Docker + Python + Streamlit)")
+st.set_page_config(page_title="Devops beadandó", page_icon="💬")
+
+# Title
+st.markdown("<h1 style='text-align: center;'>Devops beadandó projekt</h1><h2 style='text-align: center;'>Echo chat bot</h2>", unsafe_allow_html=True)
+st.markdown("***")
+
 
 # Chat state
 if "messages" not in st.session_state:
