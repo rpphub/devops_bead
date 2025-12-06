@@ -1,0 +1,8 @@
+services:
+  echo_server:
+    build: 
+      context: ./echo_server
+    container_name: echo_server
+    ports:
+      - 8000:8000
+    #restart: always
