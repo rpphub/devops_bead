@@ -6,3 +6,12 @@ services:
     ports:
       - 8000:8000
     #restart: always
+  echo_client:
+    build: 
+      context: ./echo_client
+    container_name: echo_client
+    ports:
+      - 8080:8501
+    #restart: always
+    depends_on:
+      - echo_server  
