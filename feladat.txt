@@ -1,0 +1,122 @@
+1. Cél
+Készíts egy egyszerű („Hello world” szintű) alkalmazást, és mutasd be rajta keresztül az alap DevOps lépéseket:
+kódkészítés
+verziókövetés (trunk-based)
+buildelés
+konténerizálás
+legalább egy választandó: CI / devcontainer / felhő / IaC.
+A felhasznált eszközök és technológiák (programnyelv, git, felhő, IaC, stb) szabadon választhatók - értsd: az egyes feladatoknál javasolt eszközök és technológiák csak iránymutatásként szerepelnek, nem kötelező azok közül választani.
+
+Teljes számon kérés
+Beadandó projekt feladat (ez a feladat) - 40% 
+"Pitch" videó (külön feladat) - 30%
+Teszt feladat (külön feladat) - 30%
+A számonkérés során mindhárom feladatot szükséges teljesíteni. A feladatok teljesítése során 50%-ot szükséges teljesíteni az alábbi feltételekkel:
+
+Beadandó projekt feladat (ez a feladat)
+Kötelező feladatrész teljesítése - 60%
+Kötelezően választandó feladatrész - 40%
+"Pitch" videó (külön feladat)
+Kötelező feladatrész bemutatása - 60%
+Kötelezően választandó feladatrész bemutatása - 40%
+Teszt feladat (külön feladat)
+Rendszer által értékelt
+Beadás:
+
+Elkészült kód feltöltése Git repositoryba
+Legalább egy TXT fájl feltöltése Neptunba, amiben szerepel a publikus Git repository linkje (beadás előtt érdemes ellenőrizni, hogy a link valóban publikus-e)
+2. Kötelező feladatrész
+Az alábbi pontok teljesítése kötelező.
+2.1. Alkalmazás
+Készíts egy „Hello world” szintű appot szabadon választott technológiával (Node, Python, PHP, .NET, Java, Go, stb.) - tipp: a legegyszerűbb valamilyen frontend technológiával készülő appot választani - a React pl. nagyon jó támogatást ad az egyes részfeladatok teljesítéséhez
+Az alkalmazás:
+legyen HTTP-n elérhető (pl. http://localhost:8080),
+adjon vissza legalább egy egyszerű szöveget.
+2.2. Buildelés
+Az appot egy jól dokumentált paranccsal lehessen buildelni.
+A build parancs(ok) legyen(ek) leírva a README.md-ben (pl. „Build” szekció alatt).
+pl. npm run build, dotnet build, mvn package, stb.
+Elvárás: egy külső ember is végig tudja csinálni a buildet a README alapján.
+2.3. Git használata – trunk-based development
+Az apphoz készüljön Git repository (javasolt eszközök: GitHub / GitLab / egyéb free Git szolgáltató elfogadott, az elkészült forráskódot ide kell feltölteni
+A repóban:
+legyen egy main (vagy master) branch, ez a „trunk”,
+legyen több, egymásra épülő változás, commitokkal bemutatva
+legyen látható legalább egy feature branch 
+A változások lehetnek csak szöveges módosítások is (pl. új üzenet, extra sor, új „feature” felirat), a lényeg, hogy:
+commitok tükrözzék, hogy „új funkció” vagy változás történt,
+a commitüzenetek legyenek értelmesek (ne asd, fix, stb.).
+Figyelem: a változásokat pusholni is szükséges a választott szolgáltató remote-jába, hogy ellenőrizni tudjuk a feladatot.
+
+2.4. Dockerizálás
+Az alkalmazásról készüljön Docker image, melynek követelményei:
+legyen egy működő Dockerfile a projektben,
+a konténer induláskor automatikusan elindítja az appot,
+a README.md tartalmazza:
+image build parancsot (pl. docker build -t hello-devops:v1 .),
+futtatási parancsot (pl. docker run -p 8080:8080 hello-devops:v1).
+A konténerből futó alkalmazás legyen elérhető HTTP-n (pl. localhost:8080).
+3. Kötelezően választandó feladatrész
+Az alábbi négy lehetőség közül legalább egyet kötelező választani, és megvalósítani. (Többet is el lehet készíteni, de az értékelés során csak 1 feladatot veszünk figyelembe.)
+
+3.1. FEJLESZTÉS - Dev container (opció 1)
+Készíts egy Dev Container konfigurációt, amivel a projekt:
+pl: VS Code Dev Containers-ben, vagy
+GitHub Codespaces-ben futtatható, buildelhető.
+Követelmények:
+legyen egy .devcontainer mappa a repóban,
+benne legalább:
+devcontainer.json,
+Dockerfile (ha nem a meglévőt használod).
+A Dev Containerben:
+az app a leírt lépések szerint buildelhető,
+és futtatható (pl. npm install && npm run dev vagy amit használsz).
+README-ben röviden írd le:
+hogyan indítható a projekt Dev Containerben.
+3.2. CI - pipeline + free registry (opció 2)
+Készíts egy CI pipeline-t, amely:
+automatikusan buildeli az appot, és
+Docker image-et készít, majd
+azt egy free registry-be pusholja.
+Javasolt eszközök:
+GitHub Actions + Docker Hub / GitHub Container Registry,
+GitLab CI + GitLab Container Registry,
+bármely más ingyenes/free tier registry.
+Követelmény:
+legyen .github/workflows/...yml vagy .gitlab-ci.yml (rendszerfüggően),
+a pipeline:
+pullolja a kódot,
+buildeli az appot,
+buildeli a Docker image-et,
+pusholja egy registrybe (pl. docker push ...).
+Legyen leírva a README-ben, hogy:
+hova pusholod az image-et (registry URL / image neve),
+hogyan lehet a registryből lehúzni és elindítani az image-et.
+3.3. IaC - Terraform infrastruktúra (opció 3)
+Terraformmal készíts egy olyan infrastruktúrát, ahol akár működhetne is az appod. Nem kötelező, hogy az app tényleg el is induljon rajt – a lényeg: az infra legyen meg, Terraformmal definiálva.
+ 
+Példák (infrastruktúra lehet):
+Egy felhőben:
+resource group + app service / container instance,
+vagy VM + hálózat + security group.
+Vagy bármi más életképes infra, ahol a te appod elvileg futhatna.
+Követelmények:
+legyen egy terraform könyvtár vagy .tf fájl(ok),
+legyen README rész:
+milyen providert használsz,
+nagyvonalakban mit hoz létre,
+hogyan kell terraform init, terraform plan, terraform apply parancsokat futtatni.
+Nem követelmény, hogy a Terraformmal létrehozott infrastruktúrán automatikusan fusson is az app – elég, ha egyértelmű, hogy ez egy használható célkörnyezet lenne.
+3.4. CD - Felhő szolgáltatás használata (opció 4)
+Használj valamilyen felhő szolgáltatást (free tier, ingyenes csomag), és indítsd el benne az alkalmazásodat.
+ 
+Példák (nem kötelező ezekhez ragaszkodni):
+Render, Fly.io, Railway, Azure free tier, AWS free tier, stb.
+Követelmények:
+az app ténylegesen fusson a felhőben,
+legyen egy URL, ahol (legalább időszakosan) elérhető,
+a README tartalmazza:
+a szolgáltató nevét,
+a deploy lépéseit röviden,
+a publikus URL-t (ha van).
+(Nem gond, ha idővel pl a free tier miatt leáll, a lényeg a deploy folyamat dokumentálása.)

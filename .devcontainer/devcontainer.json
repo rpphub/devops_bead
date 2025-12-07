@@ -1,0 +1,41 @@
+{
+  "name": "echo-chat-dev",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12-bullseye",
+
+  "workspaceFolder": "/workspace",
+
+  "mounts": [
+    "source=.,target=/workspace,type=bind"
+  ],
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.analysis.typeCheckingMode": "basic",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  },
+
+  // Port forward a két appnak
+  "forwardPorts": [
+    8000,  // Flask echo szerver
+    8501   // Streamlit kliens
+  ],
+
+  // A konténer working dir-je
+  "remoteUser": "vscode",
+
+  // A konténer indulása után lefutó parancs
+  "postCreateCommand": "pip install -r echo_client/app/requirements.txt -r echo_server/app/requirements.txt",
+
+  // Ha szeretnéd, hogy automatikusan induljanak a folyamatok, itt lehetne scriptet hívni,
+  // de most kézzel indítjuk őket külön terminálokból.
+  "postStartCommand": ""
+}

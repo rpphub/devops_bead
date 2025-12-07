@@ -1,9 +1,8 @@
 import requests
 import streamlit as st
 
-SERVER_URL = "http://echo_server:8000/echo"  # docker-compose service név
-#SERVER_URL = "http://localhost:8000/echo"  # docker-compose service név
-
+SERVER_URL = "http://echo_server:8000/echo"  # docker-compose service esetén
+#SERVER_URL = "http://localhost:8000/echo"  # Dev container esetén, illetve lokálisan futtatva
 st.set_page_config(page_title="Devops beadandó", page_icon="💬")
 
 # Title
