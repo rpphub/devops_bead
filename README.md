@@ -1,9 +1,9 @@
 # GDE Devops Beadandó
 ## Futtatás
 Docker composeba van téve a 2 container így 1 parancs szükséges
-ˇˇˇ
+`
 docker compose up -d
-ˇˇˇ
+`
 Parancs kiadása után elindul a 2 container,
 Böngészőben a http://localhost:8080/ -on megjeleníthető a frontend.
 
